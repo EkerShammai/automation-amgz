@@ -1,0 +1,29 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress open",
+    "test:headless": "npx cypress run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "cheerio": "^1.0.0-rc.12",
+    "cypress": "^13.17.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.6.0",
+    "cypress-plugin-tab": "^1.0.5",
+    "eslint": "^9.6.0",
+    "eslint-plugin-chai-friendly": "^1.0.0",
+    "eslint-plugin-cypress": "^3.3.0",
+    "eslint-plugin-mocha": "^10.4.3",
+    "fakerbankbr": "^1.1.3",
+    "globals": "^15.8.0"
+  },
+  "description": ""
+}

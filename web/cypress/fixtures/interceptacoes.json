@@ -1,0 +1,66 @@
+{
+  "consultarConvenios": {
+    "metodo": "GET",
+    "url": "cartao-beneficio/consulta-convenios"
+  },
+  "restricaoCliente": {
+    "metodo": "POST",
+    "url": "restricoes-cliente"
+  },
+  "verificaCartao": {
+    "metodo": "POST",
+    "url": "cartao-beneficio/verifica-cartao"
+  },
+  "simularLimite": {
+    "metodo": "POST",
+    "url": "cartao-beneficio/simulacao-limite"
+  },
+  "simularSaque": {
+    "metodo": "POST",
+    "url": "cartao-beneficio/simulacao-saque"
+  },
+  "simularSeguro": {
+    "metodo": "POST",
+    "url": "cartao-beneficio/seguros"
+  },
+  "formalizacao": {
+    "metodo": "GET",
+    "url": "contratos/formalizacao/enviar-link"
+  },
+  "availableOffers": {
+    "metodo": "GET",
+    "url": "available-offers/*"
+  },
+  "consultaDocumentos": {
+    "metodo": "POST",
+    "url": "contratos/consulta-documentos-produto"
+  },
+  "buscarCep": {
+    "metodo": "POST",
+    "url": "buscar-cep"
+  },
+  "corban": {
+    "metodo": "POST",
+    "url": "auth/corban/correspondente"
+  },
+  "listarUF": {
+    "metodo": "GET",
+    "url": "listar-ufs"
+  },
+  "listarDocumentos": {
+    "metodo": "GET",
+    "url": "listar-documentos"
+  },
+  "listarSexos": {
+    "metodo": "GET",
+    "url": "listar-sexos"
+  },
+  "criarContrato": {
+    "metodo": "POST",
+    "url": "criar-contrato"
+  },
+  "criarEnvelope": {
+    "metodo": "POST",
+    "url": "criar-envelope"
+  }
+}
