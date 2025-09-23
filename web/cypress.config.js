@@ -5,9 +5,9 @@ module.exports = defineConfig({
   defaultCommandTimeout: 9000,
   e2e: {
     env: {
-      AMIGOZ_URL: 'https://staging.happyconsig.com.br/login',
-      BACKOFFICE_URL: 'https://backoffice-staging.happyconsig.com.br',
-      API_URL: 'https://backoffice-staging.happyconsig.com.br/api',
+      AMIGOZ_URL: 'https://staging.amigozconsig.com.br/login',
+      BACKOFFICE_URL: 'https://backoffice-staging.amigozconsig.com.br/',
+      API_URL: 'https://backoffice-staging.amigozconsig.com.br//api',
       EMAIL_VALIDO: process.env.EMAIL_VALIDO,
       CPF_VALIDO: process.env.CPF_VALIDO,
       SENHA_VALIDA: process.env.SENHA_VALIDA,

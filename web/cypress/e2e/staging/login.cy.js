@@ -8,7 +8,7 @@ const mensagens = {
 };
 
 const loginPage = new LoginPage();
-
+ 
 describe('Página de Login', () => {
   beforeEach(() => {
     cy.intercept(

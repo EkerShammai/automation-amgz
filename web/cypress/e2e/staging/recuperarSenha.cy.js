@@ -8,7 +8,7 @@ const mensagens = {
   descricaoEmailEnviado:
     'Confira seu e-mail e abra o link que enviamos para continuar.',
 };
-
+ 
 describe('Página de Redefinição de Senha', () => {
   const recuperarSenhaPage = new RecuperarSenhaPage();
 

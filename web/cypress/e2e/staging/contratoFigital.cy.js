@@ -8,7 +8,7 @@ import { RogadoPage } from '../../support/pages/RogadoPage';
 import { SimulacaoPage } from '../../support/pages/SimulacaoPage';
 import { TestemunhaPage } from '../../support/pages/TestemunhaPage';
 
-const API_URL = Cypress.env('API_URL');
+const API_URL = Cypress.env('API_URL'); 
 
 const registrarIntercepts = () => {
   cy.fixture('interceptacoes.json').then((interceptacoes) => {
