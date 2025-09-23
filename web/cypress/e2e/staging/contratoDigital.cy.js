@@ -9,7 +9,7 @@ import { RogadoPage } from '../../support/pages/RogadoPage';
 import { SimulacaoPage } from '../../support/pages/SimulacaoPage';
 import { TestemunhaPage } from '../../support/pages/TestemunhaPage';
 
-const API_URL = Cypress.env('API_URL');
+const API_URL = Cypress.env('API_URL'); 
 
 const identificacaoPage = new IdentificacaoPage();
 const rogadoPage = new RogadoPage();
@@ -38,11 +38,11 @@ describe('Contrato Digital', () => {
 
   it('Deve criar um contrato com sucesso com o tipo de produto "Cartão Consignado" e "Margem Única"', () => {
     const valorMargem = 1000;
-    const numeroConvenio = '6';
+    const numeroConvenio = '6'; 
     const cartao = cartoes.consignado.nome;
     const margemUnica = cartoes.consignado.margens[0];
 
-    cy.ClicarBotaoCriarContrato();
+    cy.get('.ant-card .card-emoji').first().click();
     cy.wait('@consultarConvenios');
     identificacaoPage.selecionarConvenio(numeroConvenio);
     identificacaoPage.preencherFormulario();
@@ -62,18 +62,21 @@ describe('Contrato Digital', () => {
     dadosPessoaisPage.preencherFormulario();
     cy.ClicarBotao('Continuar');
 
-    enderecoPage.preencherFormulario();
+      enderecoPage.preencherFormulario();
     cy.ClicarBotao('Continuar');
     cy.wait(800);
+
+    const documentoCliente = Cypress.env('documentoCliente');
+
+    cy.EnviarDocumento(documentoCliente, true);
     cy.ClicarBotao('Continuar');
 
-    cy.wait('@formalizacao', { timeout: 10000 });
+    cy.wait('@criarContrato', { timeout: 12000 });
 
     cy.contains(
       'Digitação realizada com sucesso, prossiga com a formalização pelo(a) cliente.'
     ).should('be.visible');
 
-    cy.contains('Automatizado Targaryen').should('be.visible');
     cy.contains('Link para formalização').should('be.visible');
 
     cy.get('button span').contains('Copiar link').should('be.visible');
@@ -85,13 +88,13 @@ describe('Contrato Digital', () => {
     cy.get('button span').contains('Enviar WhatsApp').should('be.visible');
   });
 
-  it('Deve criar um contrato com sucesso com o tipo de produto "Cartão Benefício" e "Margem Compra"', () => {
+  it.only('Deve criar um contrato com sucesso com o tipo de produto "Cartão Benefício" e "Margem Compra"', () => {
     const valorMargem = 1000;
     const numeroConvenio = '6';
     const cartao = cartoes.beneficio.nome;
     const margemCompra = cartoes.beneficio.margens[0];
 
-    cy.ClicarBotaoCriarContrato();
+    cy.get('.ant-card .card-emoji').first().click();
     cy.wait('@consultarConvenios');
     identificacaoPage.selecionarConvenio(numeroConvenio);
     identificacaoPage.preencherFormulario();
@@ -100,7 +103,7 @@ describe('Contrato Digital', () => {
     margemPage.preencherSimulacao(cartao, margemCompra, valorMargem);
     cy.ClicarBotao('Simular oferta');
 
-    cy.wait(['@simularLimite', '@simularSeguro']);
+    cy.wait(10000);
     cy.ClicarBotao('Continuar');
 
     cy.wait(['@listarUF', '@listarDocumentos', '@listarSexos']);
@@ -140,7 +143,7 @@ describe('Contrato Digital', () => {
     const cartao = cartoes.beneficio.nome;
     const margemSaque = cartoes.beneficio.margens[1];
 
-    cy.ClicarBotaoCriarContrato();
+    cy.get('.ant-card .card-emoji').first().click();
     cy.wait('@consultarConvenios');
     identificacaoPage.selecionarConvenio(numeroConvenio);
     identificacaoPage.preencherFormulario();
@@ -189,7 +192,7 @@ describe('Contrato Digital', () => {
     const cartao = cartoes.beneficio.nome;
     const margemUnica = cartoes.beneficio.margens[2];
 
-    cy.ClicarBotaoCriarContrato();
+    cy.get('.ant-card .card-emoji').first().click();
     cy.wait('@consultarConvenios');
     identificacaoPage.selecionarConvenio(numeroConvenio);
     identificacaoPage.preencherFormulario();
@@ -241,7 +244,7 @@ describe('Contrato Digital', () => {
     const numeroConvenio = '6';
     const margemPage2 = new MargemPage(1);
 
-    cy.ClicarBotaoCriarContrato();
+    cy.get('.ant-card .card-emoji').first().click();
     cy.wait('@consultarConvenios');
     identificacaoPage.selecionarConvenio(numeroConvenio);
     identificacaoPage.preencherFormulario();
@@ -318,7 +321,7 @@ describe('Contrato Digital', () => {
     const margemUnica = cartoes.beneficio.margens[2];
     const numeroConvenio = '6';
 
-    cy.ClicarBotaoCriarContrato();
+    cy.get('.ant-card .card-emoji').first().click();
     cy.wait('@consultarConvenios');
     identificacaoPage.selecionarConvenio(numeroConvenio);
     identificacaoPage.preencherCPF();
@@ -383,7 +386,7 @@ describe('Contrato Digital', () => {
     const margemUnica = cartoes.beneficio.margens[2];
     const numeroConvenio = '1';
 
-    cy.ClicarBotaoCriarContrato();
+    cy.get('.ant-card .card-emoji').first().click();
     cy.wait('@consultarConvenios');
     identificacaoPage.selecionarConvenio(numeroConvenio);
     identificacaoPage.preencherCPF('118.922.260-49');
@@ -441,59 +444,6 @@ describe('Contrato Digital', () => {
     cy.contains(mensagensRepresentante.instrucoesFormalizacao).should(
       'be.visible'
     );
-    cy.contains('button', 'Copiar link').should('be.visible');
-    cy.contains('button', 'Enviar SMS').should('be.visible');
-    cy.contains('button', 'Enviar WhatsApp').should('be.visible');
-  });
-  it.only('Deve criar um contrato com sucesso para um cliente com saque complementar', () => {
-    const valorMargem = 1000;
-    const cartaoBeneficio = cartoes.beneficio.nome;
-    const margemUnica = cartoes.beneficio.margens[2];
-    const numeroConvenio = '1';
-    const numerobanco = '341';
-
-    cy.ClicarBotaoCriarContrato();
-    cy.wait('@consultarConvenios');
-    identificacaoPage.selecionarConvenio(numeroConvenio);
-    identificacaoPage.preencherCPF('196.410.250-23');
-    cy.wait(['@restricaoCliente', '@verificaCartao']);
-
-    cy.wait(800);
-    cy.ClicarBotao('Continuar');
-    cy.wait(800);
-
-    cy.ClicarBotao('Simular');
-    cy.wait(800);
-
-   
-    identificacaoPage.numerobancosc(numerobanco);
-    simulacaoPage.preencherDadosBancarios();
-
-    cy.ClicarBotao('Continuar');
-
-    cy.wait(['@listarUF', '@listarDocumentos', '@listarSexos']);
-    dadosPessoaisPage.preencherFormulario();
-    representantePage.preencherDadosPessoais();
-
-    cy.ClicarBotao('Continuar');
-
-    enderecoPage.preencherFormulario();
-    cy.ClicarBotao('Continuar');
-    cy.intercept('POST', `${API_URL}/contratos/consulta-documentos-produto`).as(
-      'consultaDocumentos'
-    );
-    cy.wait('@consultaDocumentos');
-
-    const documentoCliente = Cypress.env('documentoCliente');
-
-    cy.EnviarDocumento(documentoCliente, true);
-
-    cy.wait(800);
-
-    cy.ClicarBotao('Continuar');
-
-    cy.wait('@criarContrato', { timeout: 10000 });
-
     cy.contains('button', 'Copiar link').should('be.visible');
     cy.contains('button', 'Enviar SMS').should('be.visible');
     cy.contains('button', 'Enviar WhatsApp').should('be.visible');

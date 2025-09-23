@@ -19,17 +19,17 @@ export class MargemPage {
 
   selecionarTipoCartao(cartao) {
     const cartaoMap = {
-      'Cartão Consignado': '{enter}',
-      'Cartão Benefício': '{downarrow}{enter}',
+      'Cartão Consignado': '{downarrow}{enter}',
+      'Cartão Benefício': '{enter}',
     };
     this.selecionarOpcao(this.inputs.tipoProduto, cartaoMap, cartao);
   }
 
   selecionarTipoMargem(margem) {
     const margemMap = {
-      'Margem Compra': '{enter}',
-      'Margem Saque': '{downarrow}{enter}',
-      'Margem Única': '{downarrow}{downarrow}{enter}',
+      'Margem Compra': '{downarrow}{enter}',
+      'Margem Saque': '{downarrow}{downarrow}{enter}',
+      'Margem Única': '{enter}',
     };
     this.selecionarOpcao(this.inputs.tipoMargem, margemMap, margem);
   }

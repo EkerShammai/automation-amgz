@@ -13,6 +13,7 @@ export class DadosPessoaisPage {
     nomeMae: '#customer_nome_mae',
     numeroDocumento: '#customer_documento_numero',
     uf: '#customer_documento_uf',
+    invalidez: '#customer_invalidez',
   };
 
   gerarTipoDocumento() {
@@ -93,6 +94,15 @@ export class DadosPessoaisPage {
     this.preencherCampo(this.inputs.nomeMae, nomeMae);
   }
 
+preencherInvalidez(opcao = 'Não') {
+  // clica no campo para abrir o dropdown
+  cy.get(this.inputs.invalidez).click({ force: true });
+
+  // aguarda o dropdown renderizar e clica na opção "Não"
+  cy.contains('div', opcao).click({ force: true });
+}
+
+
   preencherFormulario() {
     this.preencherTipoDocumento();
     this.preencherNumeroDocumento();
@@ -102,6 +112,7 @@ export class DadosPessoaisPage {
     this.preencherGenero();
     this.preencherEstadoCivil();
     this.preencherEmail();
+    this.preencherInvalidez();
     this.preencherRenda();
     this.preencherNomeMae();
   }

@@ -43,10 +43,10 @@ export class SimulacaoPage {
     const { numeroAgencia, numeroConta, digitoConta, codigoBanco, tipoConta } =
       gerarDadosBancarios();
 
+    this.selecionarBanco(codigoBanco);
     this.preencherNumeroAgencia(numeroAgencia);
     this.preencherNumeroConta(numeroConta);
     this.preencherDigitoConta(digitoConta);
     this.selecionarTipoConta(tipoConta);
-    this.selecionarBanco(codigoBanco);
   }
 }
